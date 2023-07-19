@@ -1,0 +1,103 @@
+package task;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class RollTheDice {
+    private static final int MAX_ROUNDS = 20;
+    private static final int MIN_DICE_VALUE = 1;
+    private static final int MAX_DICE_VALUE = 6;
+
+    private final Random random;
+    private final Scanner scanner;
+
+    public RollTheDice() {
+        random = new Random();
+        scanner = new Scanner(System.in);
+    }
+
+    public static void main(String[] args) {
+        RollTheDice game = new RollTheDice();
+        game.start();
+    }
+
+    private void start() {
+        System.out.println("Are you ready to play the game? (Y/N)");
+        String decision = scanner.next();
+
+        if (!isGameAborted(decision)) {
+            playGame();
+        }
+        System.out.println("Thank you for playing.");
+    }
+
+    private void playGame() {
+        int totalSum = 0;
+        int roundCount = 0;
+
+        while (roundCount < MAX_ROUNDS) {
+            System.out.println("TURN " + (roundCount + 1));
+            int diceRoll = rollDice();
+            System.out.println("Your dice roll is " + diceRoll);
+
+            if (diceRoll == 1) {
+                System.out.println("-------------------------");
+                System.out.println("You rolled a 1. Round ends.");
+                System.out.println("Your score is Zero!!");
+                System.out.println("Do you want to play again? (Y/N)");
+                String decisionTwo = scanner.next();
+
+                if (decisionTwo.equalsIgnoreCase("Y")) {
+                    playGame();
+                }
+                break;
+            }
+
+            System.out.println("Enter (H/R) to hold or run to continue the game: ");
+            String selection = scanner.next();
+
+            if (selection.equalsIgnoreCase("H")) {
+                System.out.println("You held. Round ends.");
+                System.out.println("Total sum: " + totalSum);
+                System.out.println("Do you want to play again? (Y/N)");
+                String decisionTwo = scanner.next();
+
+                if (decisionTwo.equalsIgnoreCase("N")) {
+                    playGame();
+                    System.out.println("Thank you for playing.");
+                }
+            }
+
+            totalSum += diceRoll;
+            roundCount++;
+            System.out.println("-------------------------");
+            System.out.println("Total sum: " + totalSum);
+
+            if (totalSum >= 20) {
+                System.out.println("Congratulations... You won the game!");
+                System.out.println("You rolled " + roundCount + " times:");
+                System.out.println("Total sum: " + totalSum);
+                System.out.println("Do you want to play again? (Y/N)");
+                String decisionThree = scanner.next();
+
+                if (decisionThree.equalsIgnoreCase("Y")) {
+                    playGame();
+                }
+                {
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Game over!");
+        System.out.println("Rounds played: " + roundCount);
+    }
+
+    private int rollDice() {
+        return random.nextInt(MAX_DICE_VALUE - MIN_DICE_VALUE + 1) + MIN_DICE_VALUE;
+    }
+
+    private boolean isGameAborted(String decision) {
+        return decision.equalsIgnoreCase("N");
+    }
+}
