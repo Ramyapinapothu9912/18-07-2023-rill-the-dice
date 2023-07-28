@@ -1,0 +1,27 @@
+public class WaterBill {
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Usage: java WaterBill <usage>");
+            return;
+        }
+
+        int usage = Integer.parseInt(args[0]);
+        int meterCharge = 75;
+        int charge;
+        int total;
+
+        if (usage <= 100) {
+            charge = usage * 5;
+            total = charge + meterCharge;
+            System.out.println("Total bill for water usage is: " + total);
+        } else if (usage <= 250) {
+            charge = usage * 10;
+            total = charge + meterCharge;
+            System.out.println("Total bill for water usage is: " + total);
+        } else {
+            charge = usage * 20;
+            total = charge + meterCharge;
+            System.out.println("Total bill for water usage is: " + total);
+        }
+    }
+}
