@@ -1,0 +1,44 @@
+package handeling;
+import java.util.Scanner;
+public class tressurehunt {
+
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to Treasure hunt!");
+        System.out.println("Finding the tressure");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Left or Right? ");
+        String direction = scanner.next().toLowerCase();
+
+        if (direction.equals("left")) {
+            System.out.print("Swim or Wait? ");
+            String action = scanner.next().toLowerCase();
+
+            if (action.equals("wait")) {
+                System.out.print("Which door (Red/Yellow/Blue) ");
+                String doorColor = scanner.next().toLowerCase();
+
+                if (doorColor.equals("red")) {
+                    System.out.println("\nBurned by fire\nGame over");
+                } else if (doorColor.equals("yellow")) {
+                    System.out.println("You Win!");
+                } else if (doorColor.equals("blue")) {
+                    System.out.println("\nEaten by beasts\nGame over");
+                } else {
+                    System.out.println("Game over");
+                }
+            } else {
+                System.out.println("Attacked by trout\nGame over");
+            }
+        } else {
+            System.out.println("Fall into a hole\nGame Over");
+        }
+
+        scanner.close();
+    }
+}
+
+
+
